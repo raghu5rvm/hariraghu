@@ -211,11 +211,6 @@ html[lang="te"] .sides .enter small { font-size: 16px; }
 @keyframes glow { 50% { box-shadow: 0 0 28px rgba(217,180,106,.35); } }
 /* Groom button: warm sunlight glow, the same size and pulse as the bride's */
 .sides .enter[data-side="groom"] { animation-name: sunglow; }
-/* Mouse / trackpad screens: slightly soft until hovered (touch screens stay sharp) */
-@media (hover: hover) {
-  .sides .enter { filter: blur(0.7px); transition: filter .4s ease, border-color .4s ease; }
-  .sides .enter:hover, .sides .enter:focus-visible { filter: none; }
-}
 @keyframes sunglow {
   0%, 100% { box-shadow: 0 0 14px rgba(224, 186, 110, 0.22), inset 0 0 10px rgba(224, 186, 110, 0.06); }
   50%      { box-shadow: 0 0 34px 6px rgba(230, 190, 110, 0.5), inset 0 0 14px rgba(230, 190, 110, 0.12); }
