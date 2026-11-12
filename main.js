@@ -4,20 +4,80 @@
 //   caption: line shown at the bottom, per language
 //   turn:    true = swings in around the bottom-centre point; otherwise a slow, even dissolve
 //   exit:    'fade' = a turning image fades out where it is instead of swinging away
-//   zoom:    slow zoom-in while on screen (e.g. 1.12 = ends 12% closer)
+//   zoom:    slow zoom-in while on screen (e.g. 1.3 = ends 30% closer); zoomOrigin = where it zooms towards
 //   fadeIn:  how long this image takes to dissolve in (ms), if not the default
 //   tone:    colours for the names and subtitle panels (see TONES)
+//   screen:  black in the photo turns see-through, so the stars show around it
+//   pan:     false = don't pan across it on phones
 // ---------------------------------------------------------------------------
-const SCENES = [
+const GROOM_SCENES = [
   { id: 'bang',     video: 'assets/bang.mp4', bang: true, tone: 'night' },   // 5 s big bang, fades into the stars
   { id: 'stars',    stars: true, ms: 7000, tone: 'night' },
   { id: 'universe', image: 'assets/universe.jpg', ms: 5000, turn: true, tone: 'nebula', caption: { en: 'Across countless galaxies…', te: 'లెక్కలేనన్ని నక్షత్ర మండలాల నడుమ…' } },
   { id: 'earth',    image: 'assets/earth.jpg',    ms: 5000, turn: true, exit: 'fade', tone: 'ocean', caption: { en: '…on one blue planet…', te: '…ఈ భూమండలంపై…' } },
   { id: 'sunrise0', image: 'assets/sunrise0.jpg', ms: 5000, tone: 'amber', caption: { en: '…as a new day rises…', te: '…కొత్త రోజు ఉదయిస్తుండగా…' } },
-  { id: 'sunrise1', image: 'assets/sunrise1.jpg', ms: 5000, zoom: 1.12, tone: 'dawn', caption: { en: '…on the banks of the Godavari…', te: '…గోదావరి తీరాన…' } },
+  { id: 'sunrise1', image: 'assets/sunrise1.jpg', ms: 5000, zoom: 1.3, zoomOrigin: '85% 55%', tone: 'dawn', caption: { en: '…on the banks of the Godavari…', te: '…గోదావరి తీరాన…' } },
   { id: 'zoom',     video: 'assets/zoom.mp4', rate: 1.5, tone: 'forest', caption: { en: '…in the temple town of Draksharamam…', te: '…పుణ్యక్షేత్రం ద్రాక్షారామంలో…' } },
   { id: 'venue',    image: 'assets/venue.jpg',    fadeIn: 1500, ms: 2000, final: true, zoom: 1.15, tone: 'stone' },   // clear for 2 s, then darkens behind the details   // no caption: the details card opens with 'Together with their families'
 ];
+
+// Bride's page: the moon, ending on the mandapam at night.
+const BRIDE_SCENES = [
+  { id: 'bang',     video: 'assets/bang.mp4', bang: true, tone: 'night' },   // same 5 s big bang as the groom's page
+  { id: 'stars',    stars: true, ms: 7000, tone: 'night' },
+  { id: 'moon',     image: 'assets/bride/moon.jpg', ms: 6000, turn: true, exit: 'fade', screen: true, pan: false, tone: 'moon',
+                    caption: { en: 'Under the same moon…', te: 'చందమామ సాక్షిగా…' } },
+  { id: 'godavari', image: 'assets/bride/moonrise.jpg', ms: 6000, zoom: 1.2, zoomOrigin: '52% 25%', tone: 'moon',
+                    caption: { en: '…as moonlight falls on the Godavari…', te: '…గోదావరిపై వెన్నెల కురిసే వేళ…' } },
+  { id: 'zoom',     video: 'assets/zoom.mp4', rate: 1.5, tone: 'forest',            // same Google Maps zoom as the groom's page
+                    caption: { en: '…in the temple town of Draksharamam…', te: '…పుణ్యక్షేత్రం ద్రాక్షారామంలో…' } },
+  { id: 'venue',    image: 'assets/bride/venue-night.jpg', fadeIn: 1500, ms: 2000, final: true, zoom: 1.15, tone: 'moon' },   // the mandapam at night
+];
+
+// ---------------------------------------------------------------------------
+// The two sides. Each has its own scenes, music (one track per language) and
+// text that differs from the groom's page (both languages).
+// ---------------------------------------------------------------------------
+const SIDES = {
+  groom: {
+    scenes: GROOM_SCENES,
+    music: { en: 'assets/bgm-1.mp3', te: 'assets/bgm-2.mp3' },
+    text: { en: {}, te: {} },
+  },
+  bride: {
+    scenes: BRIDE_SCENES,
+    // English: bgm-3.mp3 from 14:30 to 17:30 (option A, 0:00–3:00, is kept in music-options/)
+    // Telugu:  bgm-2.mp3 from 19:37 to 19:40
+    music: { en: 'assets/bride/bgm-en.mp3', te: 'assets/bride/bgm-te.mp3' },
+    text: {
+      en: {
+        title: 'Harika & Raghu · 18 December 2026',
+        monogram: 'H &amp; R',
+        names: 'Harika &amp; Raghu',
+        names_alt: 'హారిక &amp; రఘు',
+        final_names: 'Harika <span class="amp">&amp;</span> Raghu',
+        parents: 'Daughter of Balaji &amp; Subhashini<span class="dot"> · </span><br class="br-mobile">Son of Venkateswara Rao &amp; Madhavi',
+        // the bride's side contact
+        reach_pickup: '<strong>Pickup</strong><span>We\'ll bring you from Rajahmundry to the wedding. Call Rekha on <a href=\"tel:+919553887852\">+91 95538 87852</a></span>',
+        contact: 'Questions? Call Rekha on <a href=\"tel:+919553887852\">+91 95538 87852</a>',
+        footer: 'Harika &amp; Raghu · 18 December 2026',
+      },
+      te: {
+        title: 'హారిక & రఘు · 18 డిసెంబర్ 2026',
+        monogram: 'H &amp; R',
+        names: 'హారిక & రఘు',
+        names_alt: 'Harika &amp; Raghu',
+        final_names: 'హారిక <span class="amp">&amp;</span> రఘు',
+        parents: 'బాలాజీ, సుభాషిణి గార్ల కుమార్తె<span class="dot"> · </span><br class="br-mobile">వెంకటేశ్వర రావు, మాధవి గార్ల కుమారుడు',
+        reach_pickup: '<strong>పికప్</strong><span>రాజమండ్రి నుండి వివాహానికి మేమే తీసుకువెళ్తాము. రేఖకు ఫోన్ చేయండి: <a href=\"tel:+919553887852\">+91 95538 87852</a></span>',
+        contact: 'సందేహాలుంటే రేఖకు ఫోన్ చేయండి: <a href=\"tel:+919553887852\">+91 95538 87852</a>',
+        footer: 'హారిక & రఘు · 18 డిసెంబర్ 2026',
+      },
+    },
+  },
+};
+let side = null;          // 'bride' or 'groom', chosen on the first screen
+let SCENES = [];          // the chosen side's scenes
 
 // ---------------------------------------------------------------------------
 // Telugu text. English text lives in index.html; each data-i18n key below
@@ -38,7 +98,14 @@ const TE = {
   reception: 'విందు',
   final_reception: 'శుక్రవారం, 18 డిసెంబర్ 2026<br>ఉదయం 11:30 నుండి మధ్యాహ్నం 2:00 వరకు<br>D1 కన్వెన్షన్, రాజమహేంద్రవరం',
   scroll: 'మరిన్ని వివరాలకు కిందికి జరపండి',
-  enter: 'ప్రవేశించండి',
+  side_bride: 'వధువు', side_bride_name: 'హారిక',
+  side_groom: 'వరుడు', side_groom_name: 'రఘు',
+  nav_haldi: 'పసుపు',
+  haldi: 'పసుపు & పెళ్లికూతురు వేడుక',
+  final_haldi: 'గురువారం, 17 డిసెంబర్ 2026<br>ఉదయం 9 గంటల నుండి<br>వధువు ఇంటి వద్ద, జిన్నూరు, పాలకొల్లు',
+  haldi_date: 'గురువారం, 17 డిసెంబర్ 2026',
+  haldi_time: 'ఉదయం 9 గంటల నుండి',
+  haldi_address: 'వధువు ఇంటి వద్ద<br>జిన్నూరు, పాలకొల్లు',
   skip: 'దాటవేయి',
   wedding_eyebrow: 'వివాహం',
   date: 'శుక్రవారం, 18 డిసెంబర్ 2026',
@@ -50,22 +117,15 @@ const TE = {
   reception_time: 'ఉదయం 11:30 నుండి మధ్యాహ్నం 2:00 వరకు',
   reception_address: 'D1 కన్వెన్షన్<br>1, వాకర్స్ రోడ్, వెంకటేశ్వర నగర్, రాజమహేంద్రవరం, ఆంధ్రప్రదేశ్ 533103',
   getting_there: 'ఎలా చేరుకోవాలి',
-  map_wedding: 'వివాహం · ద్రాక్షారామం ఆలయం',
-  map_reception: 'విందు · D1 కన్వెన్షన్, రాజమహేంద్రవరం',
-  by_air: 'విమానంలో',
-  by_air_text: 'సమీప విమానాశ్రయం: రాజమండ్రి విమానాశ్రయం (RJA), మధురపూడి.',
-  by_rail: 'రైలులో',
-  by_rail_text: 'సమీప రైల్వే స్టేషన్: రాజమండ్రి (RJY), చెన్నై–హౌరా ప్రధాన మార్గంలో ఉంది.',
-  by_road: 'రోడ్డు మార్గంలో',
-  by_road_text: 'ప్రధాన నగరాల నుండి రాజమండ్రికి నేరుగా APSRTC, ప్రైవేట్ బస్సులు అందుబాటులో ఉన్నాయి.',
-  pickup: 'మేము తీసుకువెళ్తాము',
-  pickup_text: 'రాజమండ్రి నుండి సుమారు 42 కి.మీ. దూరంలోని ద్రాక్షారామం వివాహానికి మేము మిమ్మల్ని తీసుకువెళ్తాము. మీ రాక వివరాలను రఘుకు తెలపండి: <a href=\"tel:+918639993299\">+91 86399 93299</a>.',
+  reach_air: '<strong>విమానం</strong><span>రాజమండ్రి విమానాశ్రయం (RJA)</span>',
+  reach_rail: '<strong>రైలు</strong><span>రాజమండ్రి రైల్వే స్టేషన్ (RJY)</span>',
+  reach_road: '<strong>బస్సు</strong><span>రాజమండ్రికి నేరుగా APSRTC, ప్రైవేట్ బస్సులు</span>',
+  reach_pickup: '<strong>పికప్</strong><span>రాజమండ్రి నుండి వివాహానికి మేమే తీసుకువెళ్తాము. రఘుకు ఫోన్ చేయండి: <a href=\"tel:+918639993299\">+91 86399 93299</a></span>',
   cd_days: 'రోజులు', cd_hours: 'గంటలు', cd_mins: 'నిమిషాలు', cd_secs: 'సెకన్లు',
-  rsvp_title: 'మీరు వస్తున్నారా?',
-  rsvp_text: 'తప్పనిసరి కాదు, కానీ ఏర్పాట్లకు ఉపయోగపడుతుంది. మీ పేరు, ఎంత మంది, ఏ కార్యక్రమాలకు వస్తున్నారో తెలపండి.',
+  rsvp_title: 'మీ రాక కోసం ఎదురుచూస్తున్నాం',
+  rsvp_text: 'మీ రాకను మాకు తెలియజేయండి.',
   rsvp_button: 'మీ రాక తెలపండి (Google Form)',
   moments: 'జ్ఞాపకాలు',
-  photo: 'ఫోటో',
   album: 'ఫోటో ఆల్బమ్',
   gift_title: 'మీ రాకే మాకు కానుక',
   gift_text: 'దయచేసి బహుమతులు ఏమీ తీసుకురాకండి… బంగారం లాంటి తేలికైనవి అయితే తప్ప <span class="wink">😉</span>',
@@ -79,7 +139,7 @@ const TE = {
 const $ = (id) => document.getElementById(id);
 const layersRoot = $('layers'), stage = $('top');
 const names = $('names'), namesMain = $('names-main'), caption = $('caption'), finalCard = $('final');
-const gate = $('gate'), enterBtn = $('enter'), skipBtn = $('skip'), soundBtn = $('sound'), langBtn = $('lang');
+const gate = $('gate'), skipBtn = $('skip'), soundBtn = $('sound'), langBtn = $('lang');
 const prevBtn = $('prev'), nextBtn = $('next');
 const tracks = { en: $('bgm-en'), te: $('bgm-te') };
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -96,7 +156,11 @@ let lang = new URLSearchParams(location.search).get('lang');
 if (lang !== 'te' && lang !== 'en') { try { lang = localStorage.getItem('lang'); } catch (e) {} }
 if (lang !== 'te') lang = 'en';
 
-function t(key) { return (lang === 'te' ? TE[key] : EN[key]) ?? EN[key]; }
+function t(key) {
+  const own = side ? SIDES[side].text[lang] : null;       // the chosen side's own text
+  if (own && key in own) return own[key];
+  return (lang === 'te' ? TE[key] : EN[key]) ?? EN[key];
+}
 
 function applyLang() {
   document.documentElement.lang = lang;
@@ -140,6 +204,7 @@ const TONES = {
   dawn:   { panel: 'rgba(255, 243, 230, 0.72)', ink: '#3b2414', accent: '#a2501d' },
   forest: { panel: 'rgba(8, 28, 22, 0.62)',    ink: '#f2f7ee', accent: '#e6d28a' },
   stone:  { panel: 'rgba(30, 21, 13, 0.62)',   ink: '#f8efe2', accent: '#d9b46a' },
+  moon:   { panel: 'rgba(14, 18, 44, 0.62)',   ink: '#eef0ff', accent: '#c9d4ff' },
 };
 function setTone(name) {
   const tn = TONES[name] || TONES.night;
@@ -164,19 +229,24 @@ const HOLD_TILT = 6;     // degrees either side of upright while on screen
 
 let W = 0, H = 0;
 
-// ---------- Build layers ----------
-SCENES.forEach((s) => {
+// ---------- Build layers (for the chosen side) ----------
+function buildLayers() {
+  layersRoot.innerHTML = '';
+  SCENES.forEach(buildLayer);
+}
+function buildLayer(s) {
   if (s.stars) return;
   const el = document.createElement(s.video ? 'video' : 'div');
-  el.className = 'layer' + (s.turn ? ' turn' : '');
+  el.className = 'layer' + (s.turn ? ' turn' : '') + (s.screen ? ' screen' : '');
   if (s.video) {
     el.src = s.video; el.muted = true; el.playsInline = true; el.preload = 'auto';
   } else {
     el.style.backgroundImage = `url(${s.image})`;
   }
+  if (s.zoomOrigin) el.style.transformOrigin = s.zoomOrigin;
   s.el = el;
   layersRoot.appendChild(el);
-});
+}
 
 // ---------- Starfield: turns around the same bottom-centre point ----------
 const canvas = $('stars'), ctx = canvas.getContext('2d');
@@ -247,6 +317,14 @@ function turn(s, holdMs, inMs) {
   s.el.animate([
     { opacity: 0, easing: 'ease-in-out' }, { opacity: 1, offset: a }, { opacity: 1, offset: b }, { opacity: 0 },
   ], { duration: T, fill: 'forwards' });
+  pan(s, T);
+}
+
+// Portrait screens crop landscape photos to a narrow strip, so pan across them left to right
+const PORTRAIT = matchMedia('(max-aspect-ratio: 1/1)');
+function pan(s, ms) {
+  if (!s.image || s.final || s.pan === false || !PORTRAIT.matches) return;
+  s.el.animate([{ backgroundPosition: '0% 50%' }, { backgroundPosition: '100% 50%' }], { duration: ms, easing: 'ease-in-out', fill: 'forwards' });
 }
 
 // Dissolve in, hold, dissolve out as the next one arrives on top
@@ -256,6 +334,7 @@ function dissolve(s, holdMs, inMs) {
     { opacity: 0, easing: 'ease-in-out' }, { opacity: 1, offset: a }, { opacity: 1, offset: b, easing: 'ease-in-out' }, { opacity: 0 },
   ], { duration: T, fill: 'forwards' });
   if (s.zoom) slowZoom(s, T);
+  pan(s, T);
 }
 
 // Gentle zoom-in (Ken Burns) from full size to s.zoom over ms
@@ -286,7 +365,7 @@ function resetLayer(x) {
 // play(i) runs the intro from scene i onward. Moving with the arrows starts a new run;
 // 'run' tells an older run to stop.
 let run = 0, index = 0;
-const FIRST_IMAGE = SCENES.findIndex((x) => !x.stars && !x.bang);
+let FIRST_IMAGE = 0;   // set when a side is chosen
 
 async function play(from, jumped) {
   const me = ++run;
@@ -405,8 +484,22 @@ document.addEventListener('visibilitychange', () => {
 });
 
 // ---------- Start, skip ----------
-enterBtn.addEventListener('click', (e) => {
+function chooseSide(s) {
+  side = s;
+  document.body.classList.add('side-' + s);   // shows the parts marked data-only="bride"
+  SCENES = SIDES[s].scenes;
+  buildLayers();
+  FIRST_IMAGE = SCENES.findIndex((x) => !x.stars && !x.bang);
+  for (const l of ['en', 'te']) {                 // this side's music
+    const src = SIDES[s].music[l];
+    if (tracks[l].getAttribute('src') !== src) tracks[l].src = src;
+  }
+  applyLang();
+}
+
+document.querySelectorAll('[data-side]').forEach((btn) => btn.addEventListener('click', (e) => {
   e.stopPropagation();
+  chooseSide(btn.dataset.side);
   started = true;
   startMusic();                            // first thing in the tap, so it plays at once
   gate.classList.add('hidden');
@@ -414,7 +507,7 @@ enterBtn.addEventListener('click', (e) => {
   setMuted(muted);
   if (reduceMotion) showFinal(null);
   else runIntro();
-});
+}));
 
 function skip() { if (running) showFinal(null); }
 skipBtn.addEventListener('click', (e) => { e.stopPropagation(); skip(); });
@@ -439,6 +532,13 @@ addEventListener('touchend', (e) => {
 }, { passive: true });
 stage.addEventListener('click', () => { if (running) skip(); });
 
+// ---------- Home: the monogram reloads the site back to the Bride / Groom choice ----------
+history.scrollRestoration = 'manual';          // a reload always starts at the top
+$('home').addEventListener('click', (e) => {
+  e.preventDefault();
+  location.href = location.pathname + location.search;   // keeps ?lang=…, drops any #section
+});
+
 // ---------- Menu ----------
 const menuToggle = $('menu-toggle'), menuLinks = $('menu-links');
 menuToggle.addEventListener('click', () => {
@@ -458,7 +558,7 @@ const io = new IntersectionObserver((entries) => {
 document.querySelectorAll('main section').forEach((s) => io.observe(s));
 
 // Placeholder links: do nothing until real links are added
-document.querySelectorAll('[data-placeholder]').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
+document.addEventListener('click', (e) => { if (e.target.closest('a[href="#"]')) e.preventDefault(); });
 
 // ---------- Countdown to the muhurtham ----------
 const WEDDING = new Date('2026-12-18T03:45:00+05:30');

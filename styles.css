@@ -74,6 +74,7 @@ html[lang="te"] .lang { font-family: var(--sans); font-size: 13px; letter-spacin
 #stars, #layers { position: absolute; inset: 0; width: 100%; height: 100%; }
 #stars { transition: opacity 1.5s ease; }
 #stars.off { opacity: 0; }
+
 /* Full-screen layers; turning ones pivot on the bottom centre of the screen (main.js animates them) */
 .layer {
   position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0;
@@ -91,6 +92,9 @@ html[lang="te"] .lang { font-family: var(--sans); font-size: 13px; letter-spacin
                       linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
           mask-composite: intersect;
 }
+/* Photos on black (the moon): black becomes see-through over the stars */
+.layer.screen { mix-blend-mode: screen; background-size: contain; background-repeat: no-repeat; }   /* show the whole moon, never cropped */
+
 /* Darken the temple photo behind the final details */
 .layer.final-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,11,31,.5), rgba(7,11,31,.62) 60%, rgba(7,11,31,.72)); animation: fadeIn 1.6s ease forwards; }
 @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
@@ -132,14 +136,14 @@ html[lang="te"] .caption { font-style: normal; }
 /* Soft panel behind the names and subtitles: tinted glass whose edges fade into the image */
 .names, .caption { isolation: isolate; }
 .names::before, .caption::before {
-  content: ""; position: absolute; inset: -16px; z-index: -1; border-radius: 32px;
+  content: ""; position: absolute; inset: -4px; z-index: -1; border-radius: 18px;
   background: var(--panel);
   -webkit-backdrop-filter: blur(12px) saturate(1.2); backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent),
-                      linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 9px, #000 calc(100% - 9px), transparent),
+                      linear-gradient(to bottom, transparent, #000 9px, #000 calc(100% - 9px), transparent);
   -webkit-mask-composite: source-in;
-          mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent),
-                      linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+          mask-image: linear-gradient(to right, transparent, #000 9px, #000 calc(100% - 9px), transparent),
+                      linear-gradient(to bottom, transparent, #000 9px, #000 calc(100% - 9px), transparent);
           mask-composite: intersect;
   opacity: 0; transition: opacity 1.5s ease, background-color 1.5s ease;
 }
@@ -178,6 +182,10 @@ html[lang="te"] .eyebrow { font-size: 16px; }
 .final-events { display: flex; justify-content: center; flex-wrap: wrap; }
 .final-events > div { padding: 4px 36px; }
 .final-events > div + div { border-left: 1px solid var(--gold-soft); }
+/* Parts only on one side's page (the bride's Haldi, each side's photos) */
+[data-only] { display: none; }
+body.side-bride [data-only="bride"], body.side-groom [data-only="groom"] { display: revert; }
+body:not(.side-bride) .final-events > [data-only="bride"] + div { border-left: none; border-top: none; padding-top: 4px; }
 .final-events h2 { margin: 0 0 4px; font-family: var(--display); font-weight: 600; font-size: calc(26px * var(--display-scale)); color: var(--gold); }
 html[lang="te"] .final-events h2 { font-weight: 400; }
 .final-events p { margin: 0; font-size: 16px; }
@@ -195,7 +203,32 @@ html[lang="te"] .scroll-hint { font-size: 15px; }
   animation: glow 2.6s ease-in-out infinite;
 }
 .enter:hover { border-color: var(--gold); }
+.sides { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; padding: 0 16px; }
+.sides .enter { min-width: 180px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.side-icon { width: 22px; height: 22px; margin-bottom: 2px; color: var(--gold); }
+.sides .enter small { font-family: var(--alt); font-size: 15px; letter-spacing: 0; text-transform: none; color: var(--star); opacity: .8; }
+html[lang="te"] .sides .enter small { font-size: 16px; }
 @keyframes glow { 50% { box-shadow: 0 0 28px rgba(217,180,106,.35); } }
+/* Groom button: warm sunlight glow, the same size and pulse as the bride's */
+.sides .enter[data-side="groom"] { animation-name: sunglow; }
+/* Mouse / trackpad screens: slightly soft until hovered (touch screens stay sharp) */
+@media (hover: hover) {
+  .sides .enter { filter: blur(0.7px); transition: filter .4s ease, border-color .4s ease; }
+  .sides .enter:hover, .sides .enter:focus-visible { filter: none; }
+}
+@keyframes sunglow {
+  0%, 100% { box-shadow: 0 0 14px rgba(224, 186, 110, 0.22), inset 0 0 10px rgba(224, 186, 110, 0.06); }
+  50%      { box-shadow: 0 0 34px 6px rgba(230, 190, 110, 0.5), inset 0 0 14px rgba(230, 190, 110, 0.12); }
+}
+/* Bride button: a soft, whitish moonlight glow */
+.sides .enter[data-side="bride"] { border-color: rgba(228, 234, 255, 0.45); animation-name: moonglow; }
+.sides .enter[data-side="bride"]:hover { border-color: rgba(240, 244, 255, 0.85); }
+.sides .enter[data-side="bride"] > span { color: #f4f6ff; text-shadow: 0 0 10px rgba(236, 241, 255, 0.45); }   /* 'Bride' in moonlight white */
+.sides .enter[data-side="bride"] .side-icon { color: #eef1ff; filter: drop-shadow(0 0 4px rgba(238, 241, 255, 0.7)); }
+@keyframes moonglow {
+  0%, 100% { box-shadow: 0 0 14px rgba(232, 238, 255, 0.22), inset 0 0 10px rgba(232, 238, 255, 0.06); }
+  50%      { box-shadow: 0 0 34px 6px rgba(236, 241, 255, 0.5), inset 0 0 14px rgba(236, 241, 255, 0.12); }
+}
 .skip {
   position: absolute; right: 18px; bottom: 18px; z-index: 11;
   background: var(--panel); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); color: var(--ink);
@@ -233,6 +266,9 @@ html[lang="te"] .scroll-hint { font-size: 15px; }
 /* After the intro the mandapam stays fixed on screen and everything scrolls over it */
 body.intro-done .intro { background: transparent; }
 body.intro-done #layers { position: fixed; inset: 0; z-index: 0; }
+/* After the intro the details screen can grow taller than the screen (e.g. three events on a phone) */
+body.intro-done .intro { height: auto; min-height: 100vh; min-height: 100svh; overflow: visible; }
+body.intro-done .final { position: relative; inset: auto; min-height: 100vh; min-height: 100svh; }
 main, .footer { position: relative; z-index: 1; }
 main { background: linear-gradient(rgba(7, 11, 31, 0.35), rgba(7, 11, 31, 0.5) 25%); }
 .block { max-width: 880px; margin: 0 auto; padding: 96px 24px; text-align: center; border-bottom: 1px solid rgba(217,180,106,.12); scroll-margin-top: 60px; }
@@ -246,25 +282,35 @@ main { background: linear-gradient(rgba(7, 11, 31, 0.35), rgba(7, 11, 31, 0.5) 2
 }
 html[lang="te"] .button { font-size: 15px; }
 .button:hover { background: rgba(217,180,106,.12); }
-.maps { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
-.maps figure { margin: 0; }
-.maps iframe { width: 100%; height: 260px; border: 1px solid var(--gold-soft); border-radius: 12px; background: var(--navy-2); }
-.maps figcaption { margin-top: 8px; font-size: 14px; color: var(--muted); }
-.travel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
-.travel > div { padding: 18px 20px; border: 1px solid rgba(217,180,106,.18); border-radius: 12px; background: rgba(255,255,255,.02); }
-.travel .pickup { grid-column: 1 / -1; border-color: var(--gold-soft); background: rgba(217,180,106,.07); }
-.travel h3 { margin: 0 0 6px; font-family: var(--display); font-weight: 600; font-size: calc(22px * var(--display-scale)); color: var(--gold); }
-html[lang="te"] .travel h3 { font-weight: 400; }
-.travel p { margin: 0; color: var(--muted); font-size: 15px; }
-.gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 160px; gap: 12px; margin: 28px 0 8px; }
-.ph { display: grid; place-items: center; border-radius: 10px; border: 1px dashed var(--gold-soft); color: var(--muted); font-size: 13px; letter-spacing: var(--track); text-transform: uppercase; background: rgba(255,255,255,.02); }
-.ph.port { grid-row: span 2; }
+.reach { list-style: none; padding: 0; margin: 24px auto 0; max-width: 560px; text-align: left; }
+.reach li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(217,180,106,.15); color: var(--star); font-size: 16px; }
+.reach li:last-child { border-bottom: none; }
+.reach strong { flex: 0 0 72px; color: var(--gold); font-weight: 600; }
+html[lang="te"] .reach strong { font-weight: 500; }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 28px 0 8px; }
+.gallery figure { margin: 0; aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden; border: 1px solid var(--gold-soft); background: var(--navy-2); }
+.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+.gallery figure:hover img { transform: scale(1.04); }
+/* Cut-out portrait (transparent background): a studio-style backdrop chosen for the saree,
+   with a soft shadow at the feet so the figure stands on the ground */
+.gallery figure.cutout { border-color: rgba(217, 180, 106, 0.45); }
+.gallery figure.cutout.rose {   /* pink saree: blush cream fading to dusty rose */
+  background:
+    radial-gradient(ellipse 42% 5% at 50% 99%, rgba(70, 20, 40, 0.35), transparent),
+    radial-gradient(ellipse 80% 70% at 50% 38%, #fdf1e8 0%, #f3cdc0 45%, #c98a92 80%, #9c5a6e 100%);
+}
+.gallery figure.cutout img { object-fit: contain; object-position: 50% 100%; padding-top: 8%; }
 .wink { font-style: normal; }
 .footer { padding: 40px 24px 80px; text-align: center; color: var(--muted); font-size: 14px; background: rgba(7, 11, 31, 0.6); }
 .footer .credits { font-size: 12px; opacity: .7; }
 
 /* ---------- Phones ---------- */
 @media (max-width: 720px) {
+  /* Previous / next: smaller, side by side at the bottom (next to the sound button), out of the way of the photos */
+  .nav { top: auto; bottom: 20px; transform: none; width: 36px; height: 36px; }
+  .nav svg { width: 18px; height: 18px; }
+  .nav.prev { left: 72px; }
+  .nav.next { left: 116px; right: auto; }
   .menu { padding: 12px 124px 12px 16px; }
   .menu-toggle {
     display: block; background: none; border: 1px solid var(--gold-soft); color: var(--gold);
@@ -277,23 +323,21 @@ html[lang="te"] .travel h3 { font-weight: 400; }
   }
   .menu nav.open { display: flex; }
   .menu nav a { padding: 10px 0; }
-  .names.docked { top: 12px; left: 12px; padding: 8px 14px 10px; }
-  .names.docked .names-main { font-size: calc(30px * var(--display-scale)); }
-  .names.docked .names-alt { font-size: 18px; }
-  .caption { right: 12px; bottom: 62px; max-width: calc(100vw - 24px); }
+  .names.docked { top: 12px; left: 12px; padding: 6px 12px 8px; }
+  .names.docked .names-main { font-size: calc(22px * var(--display-scale)); }
+  .names.docked .names-alt { font-size: 14px; }
+  .caption { right: 12px; bottom: 62px; max-width: calc(100vw - 24px); padding: 6px 12px 8px; font-size: calc(15px * var(--display-scale)); }
   .final-events { flex-direction: column; gap: 18px; }
   .final-events > div + div { border-left: none; border-top: 1px solid var(--gold-soft); padding-top: 18px; }
   .parents .dot { display: none; }
   .br-mobile { display: inline; }
   .block { padding: 72px 16px; }
-  .maps { grid-template-columns: 1fr; }
-  .travel { grid-template-columns: 1fr; }
   .countdown { gap: 14px; margin-top: 22px; }
   .countdown span { font-size: 30px; }
   .final { padding-top: 64px; }
   .final-events { gap: 12px; }
   .final-events > div + div { padding-top: 12px; }
-  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; }
+  .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

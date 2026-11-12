@@ -19,9 +19,10 @@
 <body class="intro-running">
 
   <header class="menu" id="menu">
-    <a class="monogram" href="#top">R &amp; H</a>
+    <a class="monogram" href="./" id="home" data-i18n="monogram">R &amp; H</a>
     <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu-links" data-i18n="menu">Menu</button>
     <nav id="menu-links">
+      <a href="#haldi" data-i18n="nav_haldi" data-only="bride">Haldi</a>
       <a href="#wedding" data-i18n="nav_wedding">Wedding</a>
       <a href="#reception" data-i18n="nav_reception">Reception</a>
       <a href="#location" data-i18n="nav_location">Location</a>
@@ -51,6 +52,10 @@
       <p class="final-alt" data-i18n="names_alt">రఘు &amp; హారిక</p>
       <p class="parents" data-i18n="parents">Son of Venkateswara Rao &amp; Madhavi<span class="dot"> · </span><br class="br-mobile">Daughter of Balaji &amp; Subhashini</p>
       <div class="final-events">
+        <div data-only="bride">
+          <h2 data-i18n="haldi">Haldi &amp; Bridal Ceremony</h2>
+          <p data-i18n="final_haldi">Thursday, 17 December 2026<br>9:00 AM onwards<br>Bride's home, Jinnuru, Palakollu</p>
+        </div>
         <div>
           <h2 data-i18n="wedding">Wedding</h2>
           <p data-i18n="final_wedding">Friday, 18 December 2026<br>Muhurtham 3:45 AM<br>Draksharamam temple</p>
@@ -69,9 +74,12 @@
       <a class="scroll-hint" href="#wedding" data-i18n="scroll">Scroll to explore</a>
     </div>
 
-    <!-- First screen. Button label is a placeholder, to be decided. -->
+    <!-- First screen: choose the bride's or the groom's page -->
     <div class="gate" id="gate">
-      <button class="enter" id="enter" type="button" data-i18n="enter">Enter</button>
+      <div class="sides">
+        <button class="enter" type="button" data-side="bride"><svg class="side-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="currentColor"/></svg><span data-i18n="side_bride">Bride</span><small data-i18n="side_bride_name">Harika</small></button>
+        <button class="enter" type="button" data-side="groom"><svg class="side-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></g></svg><span data-i18n="side_groom">Groom</span><small data-i18n="side_groom_name">Raghu</small></button>
+      </div>
     </div>
     <button class="skip" id="skip" type="button" hidden data-i18n="skip">Skip intro</button>
     <button class="nav prev" id="prev" type="button" hidden aria-label="Previous">
@@ -83,6 +91,14 @@
   </section>
 
   <main>
+    <section class="block" id="haldi" data-only="bride">
+      <p class="eyebrow" data-i18n="haldi">Haldi &amp; Bridal Ceremony</p>
+      <h2 data-i18n="haldi_date">Thursday, 17 December 2026</h2>
+      <p class="lead" data-i18n="haldi_time">9:00 AM onwards</p>
+      <p data-i18n="haldi_address">At the bride's home<br>Jinnuru, Palakollu</p>
+      <a class="button" href="https://maps.app.goo.gl/gYkL3HBEHw3GFQxXA" target="_blank" rel="noopener" data-i18n="maps">Open in Google Maps</a>
+    </section>
+
     <section class="block" id="wedding">
       <p class="eyebrow" data-i18n="wedding_eyebrow">The wedding</p>
       <h2 data-i18n="date">Friday, 18 December 2026</h2>
@@ -104,53 +120,39 @@
     <section class="block" id="location">
       <p class="eyebrow" data-i18n="nav_location">Location</p>
       <h2 data-i18n="getting_there">How to reach</h2>
-      <div class="maps">
-        <figure>
-          <iframe title="Map of Draksharamam temple" loading="lazy" src="https://maps.google.com/maps?q=Draksharamam%20Bhimeswara%20Swamy%20Temple&amp;z=15&amp;output=embed"></iframe>
-          <figcaption data-i18n="map_wedding">Wedding · Draksharamam temple</figcaption>
-        </figure>
-        <figure>
-          <iframe title="Map of D1 Convention" loading="lazy" src="https://maps.google.com/maps?q=D1%20Convention%2C%20Walkers%20Rd%2C%20Rajamahendravaram&amp;z=15&amp;output=embed"></iframe>
-          <figcaption data-i18n="map_reception">Reception · D1 Convention, Rajamahendravaram</figcaption>
-        </figure>
-      </div>
-      <div class="travel">
-        <div>
-          <h3 data-i18n="by_air">By air</h3>
-          <p data-i18n="by_air_text">Nearest airport: Rajahmundry Airport (RJA), Madhurapudi.</p>
-        </div>
-        <div>
-          <h3 data-i18n="by_rail">By train</h3>
-          <p data-i18n="by_rail_text">Nearest railway station: Rajahmundry (RJY), on the main Chennai–Howrah line.</p>
-        </div>
-        <div>
-          <h3 data-i18n="by_road">By road</h3>
-          <p data-i18n="by_road_text">Direct APSRTC and private buses run to Rajahmundry from major cities.</p>
-        </div>
-        <div class="pickup">
-          <h3 data-i18n="pickup">We'll pick you up</h3>
-          <p data-i18n="pickup_text">We can pick you up in Rajahmundry and bring you to the wedding at Draksharamam, about 42 km away. Share your arrival details with Raghu on <a href="tel:+918639993299">+91 86399 93299</a>.</p>
-        </div>
-      </div>
+      <ul class="reach">
+        <li data-i18n="reach_air"><strong>Air</strong><span>Rajahmundry Airport (RJA)</span></li>
+        <li data-i18n="reach_rail"><strong>Train</strong><span>Rajahmundry station (RJY)</span></li>
+        <li data-i18n="reach_road"><strong>Bus</strong><span>Direct APSRTC and private buses to Rajahmundry</span></li>
+        <li data-i18n="reach_pickup"><strong>Pickup</strong><span>We'll bring you from Rajahmundry to the wedding. Call Raghu on <a href="tel:+918639993299">+91 86399 93299</a></span></li>
+      </ul>
     </section>
 
     <section class="block" id="rsvp">
       <p class="eyebrow" data-i18n="nav_rsvp">RSVP</p>
-      <h2 data-i18n="rsvp_title">Will you join us?</h2>
-      <p data-i18n="rsvp_text">It's optional, but it helps us plan. Name, how many of you, and which events.</p>
+      <h2 data-i18n="rsvp_title">We'd love to see you there</h2>
+      <p data-i18n="rsvp_text">Please let us know you're coming.</p>
       <a class="button" href="https://forms.gle/iMwoo5H7a68FCJRw5" target="_blank" rel="noopener" data-i18n="rsvp_button">RSVP (Google Form)</a>
     </section>
 
     <section class="block" id="photos">
       <p class="eyebrow" data-i18n="nav_photos">Photos</p>
       <h2 data-i18n="moments">Moments</h2>
-      <div class="gallery">
-        <div class="ph land" data-i18n="photo">Photo</div>
-        <div class="ph port" data-i18n="photo">Photo</div>
-        <div class="ph land" data-i18n="photo">Photo</div>
-        <div class="ph port" data-i18n="photo">Photo</div>
-        <div class="ph land" data-i18n="photo">Photo</div>
-        <div class="ph land" data-i18n="photo">Photo</div>
+      <div data-only="bride">
+        <div class="gallery">
+          <figure class="cutout rose"><img src="assets/photos/rams1.webp" alt="In a pink silk saree" loading="lazy"></figure>
+          <figure><img src="assets/photos/rams4.jpg" alt="On a bench among the trees" loading="lazy"></figure>
+          <figure><img src="assets/photos/rams2.jpg" alt="In a blue silk saree" loading="lazy"></figure>
+          <figure><img src="assets/photos/rams5.jpg" alt="In a garden" loading="lazy"></figure>
+        </div>
+      </div>
+      <div data-only="groom">
+        <div class="gallery">
+          <figure><img src="assets/photos/img-1532.jpg" alt="Among the plants" loading="lazy"></figure>
+          <figure><img src="assets/photos/img-3214.jpg" alt="Hiking in the mountains" loading="lazy"></figure>
+          <figure><img src="assets/photos/img-3469.jpg" alt="At India Gate at night" loading="lazy"></figure>
+          <figure><img src="assets/photos/img-4975.jpg" alt="Together" loading="lazy"></figure>
+        </div>
       </div>
       <!-- Placeholder: replace # with the shared album link -->
       <a class="button" href="#" data-placeholder data-i18n="album">Shared album</a>
