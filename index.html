@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Harika &amp; Raghu · 18 December 2026</title>
+  <meta name="description" content="Harika and Raghu are getting married on 18 December 2026 at Draksharamam.">
+  <meta property="og:title" content="Harika &amp; Raghu · 18 December 2026">
+  <meta property="og:description" content="Wedding at Draksharamam temple · Reception at D1 Convention, Rajamahendravaram">
+  <meta property="og:image" content="assets/venue.jpg">
+  <meta name="theme-color" content="#070b1f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b1f'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' fill='%23d9b46a' text-anchor='middle'%3EH%26amp;R%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@100..800&family=Gurajada&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="intro-running">
+
+  <header class="menu" id="menu">
+    <a class="monogram" href="#top">H &amp; R</a>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu-links" data-i18n="menu">Menu</button>
+    <nav id="menu-links">
+      <a href="#wedding" data-i18n="nav_wedding">Wedding</a>
+      <a href="#reception" data-i18n="nav_reception">Reception</a>
+      <a href="#location" data-i18n="nav_location">Location</a>
+      <a href="#rsvp" data-i18n="nav_rsvp">RSVP</a>
+      <a href="#photos" data-i18n="nav_photos">Photos</a>
+      <a href="#gifts" data-i18n="nav_gifts">Gift Registry</a>
+    </nav>
+  </header>
+
+  <!-- Switches the whole page (text + music) between English and Telugu -->
+  <button class="lang" id="lang" type="button" lang="te">తెలుగు</button>
+
+  <!-- Intro: layers are added by main.js from the SCENES list -->
+  <section class="intro" id="top" aria-label="Introduction">
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div id="layers"></div>
+
+    <div class="names" id="names" aria-hidden="true">
+      <p class="names-main" id="names-main" data-i18n="names">Harika &amp; Raghu</p>
+      <p class="names-alt" data-i18n="names_alt">హారిక &amp; రఘు</p>
+    </div>
+    <p class="caption" id="caption" aria-live="polite"></p>
+
+    <div class="final" id="final">
+      <p class="eyebrow" data-i18n="together">Together with their families</p>
+      <h1 class="final-names" data-i18n="final_names">Harika <span class="amp">&amp;</span> Raghu</h1>
+      <p class="final-alt" data-i18n="names_alt">హారిక &amp; రఘు</p>
+      <p class="parents" data-i18n="parents">Daughter of Subhashini &amp; Balaji<span class="dot"> · </span><br class="br-mobile">Son of Madhavi &amp; Venkateswara Rao</p>
+      <div class="final-events">
+        <div>
+          <h2 data-i18n="wedding">Wedding</h2>
+          <p data-i18n="final_wedding">Friday, 18 December 2026<br>Muhurtham 3:45 AM<br>Draksharamam temple</p>
+        </div>
+        <div>
+          <h2 data-i18n="reception">Reception</h2>
+          <p data-i18n="final_reception">Friday, 18 December 2026<br>11:30 AM to 2:00 PM<br>D1 Convention, Rajamahendravaram</p>
+        </div>
+      </div>
+      <div class="countdown" id="countdown" aria-label="Countdown to the wedding">
+        <div><span id="cd-days">0</span><small data-i18n="cd_days">Days</small></div>
+        <div><span id="cd-hours">00</span><small data-i18n="cd_hours">Hours</small></div>
+        <div><span id="cd-mins">00</span><small data-i18n="cd_mins">Minutes</small></div>
+        <div><span id="cd-secs">00</span><small data-i18n="cd_secs">Seconds</small></div>
+      </div>
+      <a class="scroll-hint" href="#wedding" data-i18n="scroll">Scroll to explore</a>
+    </div>
+
+    <!-- First screen. Button label is a placeholder, to be decided. -->
+    <div class="gate" id="gate">
+      <button class="enter" id="enter" type="button" data-i18n="enter">Enter</button>
+    </div>
+    <button class="skip" id="skip" type="button" hidden data-i18n="skip">Skip intro</button>
+    <button class="nav prev" id="prev" type="button" hidden aria-label="Previous">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="nav next" id="next" type="button" hidden aria-label="Next">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </section>
+
+  <main>
+    <section class="block" id="wedding">
+      <p class="eyebrow" data-i18n="wedding_eyebrow">The wedding</p>
+      <h2 data-i18n="date">Friday, 18 December 2026</h2>
+      <p class="lead" data-i18n="muhurtham">Muhurtham at 3:45 AM</p>
+      <p data-i18n="wedding_address">Draksharamam temple<br>3-152 Andhra Bank Street, Chandra Street, Draksharamam, Andhra Pradesh 533262</p>
+      <p class="note" data-i18n="dress">Dress code: traditional South Indian</p>
+      <a class="button" href="https://share.google/l1NijXRMaYGgG8Rqs" target="_blank" rel="noopener" data-i18n="maps">Open in Google Maps</a>
+    </section>
+
+    <section class="block" id="reception">
+      <p class="eyebrow" data-i18n="reception_eyebrow">The reception</p>
+      <h2 data-i18n="date">Friday, 18 December 2026</h2>
+      <p class="lead" data-i18n="reception_time">11:30 AM to 2:00 PM</p>
+      <p data-i18n="reception_address">D1 Convention<br>1, Walkers Road, Venkateswara Nagar, Rajamahendravaram, Andhra Pradesh 533103</p>
+      <p class="note" data-i18n="dress">Dress code: traditional South Indian</p>
+      <a class="button" href="https://maps.app.goo.gl/nJahSjZ6zzbRhznu6" target="_blank" rel="noopener" data-i18n="maps">Open in Google Maps</a>
+    </section>
+
+    <section class="block" id="location">
+      <p class="eyebrow" data-i18n="nav_location">Location</p>
+      <h2 data-i18n="getting_there">How to reach</h2>
+      <div class="maps">
+        <figure>
+          <iframe title="Map of Draksharamam temple" loading="lazy" src="https://maps.google.com/maps?q=Draksharamam%20Bhimeswara%20Swamy%20Temple&amp;z=15&amp;output=embed"></iframe>
+          <figcaption data-i18n="map_wedding">Wedding · Draksharamam temple</figcaption>
+        </figure>
+        <figure>
+          <iframe title="Map of D1 Convention" loading="lazy" src="https://maps.google.com/maps?q=D1%20Convention%2C%20Walkers%20Rd%2C%20Rajamahendravaram&amp;z=15&amp;output=embed"></iframe>
+          <figcaption data-i18n="map_reception">Reception · D1 Convention, Rajamahendravaram</figcaption>
+        </figure>
+      </div>
+      <div class="travel">
+        <div>
+          <h3 data-i18n="by_air">By air</h3>
+          <p data-i18n="by_air_text">Nearest airport: Rajahmundry Airport (RJA), Madhurapudi.</p>
+        </div>
+        <div>
+          <h3 data-i18n="by_rail">By train</h3>
+          <p data-i18n="by_rail_text">Nearest railway station: Rajahmundry (RJY), on the main Chennai–Howrah line.</p>
+        </div>
+        <div>
+          <h3 data-i18n="by_road">By road</h3>
+          <p data-i18n="by_road_text">Direct APSRTC and private buses run to Rajahmundry from major cities.</p>
+        </div>
+        <div class="pickup">
+          <h3 data-i18n="pickup">We'll pick you up</h3>
+          <p data-i18n="pickup_text">We can pick you up in Rajahmundry and bring you to the wedding at Draksharamam, about 42 km away. Share your arrival details with Raghu on <a href="tel:+918639993299">+91 86399 93299</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="rsvp">
+      <p class="eyebrow" data-i18n="nav_rsvp">RSVP</p>
+      <h2 data-i18n="rsvp_title">Will you join us?</h2>
+      <p data-i18n="rsvp_text">It's optional, but it helps us plan. Name, how many of you, and which events.</p>
+      <!-- Placeholder: replace # with the Google Form link -->
+      <a class="button" href="#" data-placeholder data-i18n="rsvp_button">RSVP (Google Form)</a>
+    </section>
+
+    <section class="block" id="photos">
+      <p class="eyebrow" data-i18n="nav_photos">Photos</p>
+      <h2 data-i18n="moments">Moments</h2>
+      <div class="gallery">
+        <div class="ph land" data-i18n="photo">Photo</div>
+        <div class="ph port" data-i18n="photo">Photo</div>
+        <div class="ph land" data-i18n="photo">Photo</div>
+        <div class="ph port" data-i18n="photo">Photo</div>
+        <div class="ph land" data-i18n="photo">Photo</div>
+        <div class="ph land" data-i18n="photo">Photo</div>
+      </div>
+      <!-- Placeholder: replace # with the shared album link -->
+      <a class="button" href="#" data-placeholder data-i18n="album">Shared album</a>
+    </section>
+
+    <section class="block" id="gifts">
+      <p class="eyebrow" data-i18n="nav_gifts">Gift Registry</p>
+      <h2 data-i18n="gift_title">Your presence is our gift</h2>
+      <p data-i18n="gift_text">Please don't bring any gifts… unless it's something lightweight, like gold <span class="wink">😉</span></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p data-i18n="footer">Harika &amp; Raghu · 18 December 2026</p>
+    <p data-i18n="contact">Questions? Call Raghu on <a href="tel:+918639993299">+91 86399 93299</a></p>
+    <p class="credits" data-i18n="credits">Map imagery: Google Earth. [Placeholder: credits for space images]</p>
+  </footer>
+
+  <button class="sound" id="sound" type="button" aria-pressed="false" aria-label="Mute music" hidden>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="waves" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="cross" d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
+
+  <!-- English page plays bgm-1, Telugu page plays bgm-2 -->
+  <audio id="bgm-en" src="assets/bgm-1.mp3" preload="auto" loop></audio>
+  <audio id="bgm-te" src="assets/bgm-2.mp3" preload="auto" loop></audio>
+  <script src="main.js"></script>
+</body>
+</html>
