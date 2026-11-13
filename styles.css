@@ -182,7 +182,7 @@ html[lang="te"] .eyebrow { font-size: 16px; }
 .final-events { display: flex; justify-content: center; flex-wrap: wrap; }
 .final-events > div { padding: 4px 36px; }
 .final-events > div + div { border-left: 1px solid var(--gold-soft); }
-/* Parts only on one side's page (the bride's Haldi, each side's photos) */
+/* Parts only on one side's page (the bride's Haldi) */
 [data-only] { display: none; }
 body.side-bride [data-only="bride"], body.side-groom [data-only="groom"] { display: revert; }
 body:not(.side-bride) .final-events > [data-only="bride"] + div { border-left: none; border-top: none; padding-top: 4px; }
@@ -282,19 +282,6 @@ html[lang="te"] .button { font-size: 15px; }
 .reach li:last-child { border-bottom: none; }
 .reach strong { flex: 0 0 72px; color: var(--gold); font-weight: 600; }
 html[lang="te"] .reach strong { font-weight: 500; }
-.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 28px 0 8px; }
-.gallery figure { margin: 0; aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden; border: 1px solid var(--gold-soft); background: var(--navy-2); }
-.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
-.gallery figure:hover img { transform: scale(1.04); }
-/* Cut-out portrait (transparent background): a studio-style backdrop chosen for the saree,
-   with a soft shadow at the feet so the figure stands on the ground */
-.gallery figure.cutout { border-color: rgba(217, 180, 106, 0.45); }
-.gallery figure.cutout.rose {   /* pink saree: blush cream fading to dusty rose */
-  background:
-    radial-gradient(ellipse 42% 5% at 50% 99%, rgba(70, 20, 40, 0.35), transparent),
-    radial-gradient(ellipse 80% 70% at 50% 38%, #fdf1e8 0%, #f3cdc0 45%, #c98a92 80%, #9c5a6e 100%);
-}
-.gallery figure.cutout img { object-fit: contain; object-position: 50% 100%; padding-top: 8%; }
 .wink { font-style: normal; }
 .footer { padding: 40px 24px 80px; text-align: center; color: var(--muted); font-size: 14px; background: rgba(7, 11, 31, 0.6); }
 .footer .credits { font-size: 12px; opacity: .7; }
@@ -332,7 +319,6 @@ html[lang="te"] .reach strong { font-weight: 500; }
   .final { padding-top: 64px; }
   .final-events { gap: 12px; }
   .final-events > div + div { padding-top: 12px; }
-  .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

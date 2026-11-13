@@ -59,7 +59,7 @@ const SIDES = {
         parents: 'Daughter of Balaji &amp; Subhashini<span class="dot"> · </span><br class="br-mobile">Son of Venkateswara Rao &amp; Madhavi',
         // the bride's side contact
         reach_pickup: '<strong>Pickup</strong><span>We\'ll bring you from Rajahmundry to the wedding. Call Rekha on <a href=\"tel:+919553887852\">+91 95538 87852</a></span>',
-        contact: 'Questions? Call Rekha on <a href=\"tel:+919553887852\">+91 95538 87852</a>',
+        contact: 'Questions? Call Ramya on <a href=\"tel:+917995608363\">+91 79956 08363</a> or Rekha on <a href=\"tel:+919553887852\">+91 95538 87852</a>',
         footer: 'Harika &amp; Raghu · 18 December 2026',
       },
       te: {
@@ -70,7 +70,7 @@ const SIDES = {
         final_names: 'హారిక <span class="amp">&amp;</span> రఘు',
         parents: 'బాలాజీ, సుభాషిణి గార్ల కుమార్తె<span class="dot"> · </span><br class="br-mobile">వెంకటేశ్వర రావు, మాధవి గార్ల కుమారుడు',
         reach_pickup: '<strong>పికప్</strong><span>రాజమండ్రి నుండి వివాహానికి మేమే తీసుకువెళ్తాము. రేఖకు ఫోన్ చేయండి: <a href=\"tel:+919553887852\">+91 95538 87852</a></span>',
-        contact: 'సందేహాలుంటే రేఖకు ఫోన్ చేయండి: <a href=\"tel:+919553887852\">+91 95538 87852</a>',
+        contact: 'సందేహాలుంటే రమ్యకు ఫోన్ చేయండి: <a href=\"tel:+917995608363\">+91 79956 08363</a>, లేదా రేఖకు: <a href=\"tel:+919553887852\">+91 95538 87852</a>',
         footer: 'హారిక & రఘు · 18 డిసెంబర్ 2026',
       },
     },
