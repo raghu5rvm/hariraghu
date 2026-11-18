@@ -459,16 +459,13 @@ function showFinal(fin) {
 let muted = false;
 try { muted = localStorage.getItem('muted') === '1'; } catch (e) {}
 
-// Both tracks play from the first tap; only the current language's track is audible,
-// so switching language is instant (and works on phones, which ignore volume changes).
+// Only the current language's track plays (iPhones stop one audio element when another starts).
 function updateAudio() {
-  tracks.en.muted = muted || lang !== 'en';
-  tracks.te.muted = muted || lang !== 'te';
+  tracks.en.muted = tracks.te.muted = muted;
+  syncPlayback();
 }
 function startMusic() {
   updateAudio();
-  tracks.en.play().catch(() => {});
-  tracks.te.play().catch(() => {});
 }
 function setMuted(m) {
   muted = m;
@@ -478,10 +475,22 @@ function setMuted(m) {
   try { localStorage.setItem('muted', m ? '1' : '0'); } catch (e) {}
 }
 soundBtn.addEventListener('click', (e) => { e.stopPropagation(); setMuted(!muted); });
-document.addEventListener('visibilitychange', () => {
+// Pause when the tab is in the background, the window loses focus or the app is switched away; resume when back.
+let away = false;
+function syncPlayback() {
   if (!started) return;
-  Object.values(tracks).forEach((a) => (document.hidden ? a.pause() : a.play().catch(() => {})));
-});
+  const off = away || document.hidden;
+  for (const l of ['en', 'te']) if (off || l !== lang) tracks[l].pause();
+  if (!off) tracks[lang].play().catch(() => {});
+}
+const setAway = (a) => () => { away = a; syncPlayback(); };
+document.addEventListener('visibilitychange', syncPlayback);
+window.addEventListener('blur', setAway(true));
+window.addEventListener('focus', setAway(false));
+window.addEventListener('pagehide', setAway(true));
+window.addEventListener('pageshow', setAway(false));
+document.addEventListener('freeze', setAway(true));
+document.addEventListener('resume', setAway(false));
 
 // ---------- Start, skip ----------
 function chooseSide(s) {
