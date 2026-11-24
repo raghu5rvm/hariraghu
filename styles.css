@@ -283,6 +283,23 @@ html[lang="te"] .button { font-size: 15px; }
 .reach strong { flex: 0 0 72px; color: var(--gold); font-weight: 600; }
 html[lang="te"] .reach strong { font-weight: 500; }
 .wink { font-style: normal; }
+/* Trips: three cards, side by side on wide screens, stacked on phones */
+.block.trips { max-width: 1120px; }
+.trips-intro { max-width: 620px; margin: 0 auto; color: var(--muted); }
+.trip-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr)); margin-top: 36px; text-align: left; }
+.trip { display: flex; flex-direction: column; padding: 26px 22px; border: 1px solid var(--gold-soft); border-radius: 16px; background: rgba(13, 20, 51, 0.72); }
+.trip .eyebrow { margin-bottom: 4px; }
+.trip h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: calc(30px * var(--display-scale)); line-height: 1.2; }
+.trip-tagline { margin: 4px 0 10px; color: var(--muted); font-family: var(--display); font-style: italic; font-size: calc(18px * var(--display-scale)); }
+html[lang="te"] .trip-tagline { font-style: normal; }
+.trip-meta { margin: 0; font-size: 13px; color: var(--gold); }
+html[lang="te"] .trip-meta { font-size: 15px; }
+.trip-day { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(217,180,106,.15); }
+.trip-day h4 { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: calc(var(--track) * 1.5); text-transform: uppercase; color: var(--gold); }
+html[lang="te"] .trip-day h4 { font-size: 15px; font-weight: 500; }
+.trip-day p { margin: 0; font-size: 15px; }
+.trip-tip { margin: auto 0 0; padding-top: 18px; font-size: 14px; color: var(--muted); }
+.trip-tip strong { color: var(--star); font-weight: 600; }
 .footer { padding: 40px 24px 80px; text-align: center; color: var(--muted); font-size: 14px; background: rgba(7, 11, 31, 0.6); }
 .footer .credits { font-size: 12px; opacity: .7; }
 
